@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"math/rand"
 	"net/http"
 	"time"
 
@@ -9,6 +11,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 type opType int
 
@@ -67,19 +73,20 @@ func (h *handler) performRequest(w http.ResponseWriter, r *http.Request, typ opT
 
 	switch typ {
 	case fast:
-		h.recordMetric(username, time.Duration(10)*time.Millisecond, 200)
+		h.recordMetric(username, time.Duration(10*rand.Float64())*time.Millisecond, 200)
 
 	case slow:
-		h.recordMetric(username, time.Duration(10)*time.Second, 200)
+		h.recordMetric(username, time.Duration(8000+2000*rand.Float64())*time.Millisecond, 200)
 
 	case failed:
-		h.recordMetric(username, time.Duration(10)*time.Millisecond, 500)
+		h.recordMetric(username, time.Duration(10*rand.Float64())*time.Millisecond, 500)
 	}
 
 	// Return a response to the client
-	fmt.Fprintf(w, "Request completed successfully!")
+	fmt.Fprint(w, "<div class=\"form-group\" contenteditable='true'>Request completed successfully!</div>")
 }
 
 func (h *handler) recordMetric(username string, duration time.Duration, code int) {
+	log.Printf("%v, %v, %v\n", username, duration, code)
 	h.histogram.WithLabelValues(username, fmt.Sprintf("%d", code)).Observe(duration.Seconds())
 }

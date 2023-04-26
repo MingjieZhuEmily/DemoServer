@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Web App</title>
+    <title>Web App with Prometheus Metrics</title>
     <style>
       /* Add some styles to make the interface look nice. */
       * {
@@ -13,7 +13,7 @@
         padding: 0;
       }
       h1 {
-        text-align: center;
+          text-align: center;
       }
       .container {
         margin: 0 auto;
@@ -22,49 +22,68 @@
       }
       .form-group {
         margin-bottom: 20px;
-      }
-      label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      input {
-        font-size: 1em;
-        padding: 5px;
-        width: 100%;
-      }
-      button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
         text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
       }
-      button:hover {
-        background-color: #3e8e41;
+      .columns {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          justify-content: center;
+      }
+      .column {
+          width: 40%;
+          min-width: 300px;
+          background-color: #f2f2f2;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 20px;
+      }
+      h2 {
+          margin-top: 0;
+      }
+      form {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 20px;
+      }
+      input[type="text"] {
+          padding: 5px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          text-align: center;
+      }
+      button[type="submit"] {
+          padding: 10px 20px;
+          font-size: 16px;
+          color: #fff;
+          background-color: #007bff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          text-align: center;
+      }
+      button[type="submit"]:hover {
+          background-color: #0069d9;
       }
     </style>
   </head>
   <body>
-    <h1>My Web App</h1>
+    <h1>Web App with Prometheus Metrics</h1>
     <div class="container">
       <div class="form-group">
         <label for="username">User Name:</label>
         <input type="text" name="username" id="username" />
       </div>
       <div class="form-group">
-        <button onclick="sendRequest('/fast')">Simulate Fast Request</button>
+        <button type="submit" onclick="sendRequest('/fast')">Simulate Fast Request</button>
       </div>
       <div class="form-group">
-        <button onclick="sendRequest('/slow')">Simulate Slow Request</button>
+        <button type="submit" onclick="sendRequest('/slow')">Simulate Slow Request</button>
       </div>
       <div class="form-group">
-        <button onclick="sendRequest('/failed')">Simulate Failed Request</button>
+        <button type="submit" onclick="sendRequest('/failed')">Simulate Failed Request</button>
       </div>
       <div id="response"></div>
     </div>
