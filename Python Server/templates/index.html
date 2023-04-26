@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web app with Prometheus metrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Web app with Prometheus metrics</h1>
+    <div class="columns">
+        <div class="column is-offset-one-quarter">
+            <h2>Mock Request</h2>
+            <form method="POST">
+                <input type="text" name="username" placeholder="Enter username...">
+                <button type="submit" name="button" value="fast">Fast request</button>
+                <button type="submit" name="button" value="slow">Slow request</button>
+                <button type="submit" name="button" value="failure">Failed request</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

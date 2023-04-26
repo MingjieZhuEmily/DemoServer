@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Web App</title>
+    <style>
+      /* Add some styles to make the interface look nice. */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+      }
+      .container {
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 600px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      input {
+        font-size: 1em;
+        padding: 5px;
+        width: 100%;
+      }
+      button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Web App</h1>
+    <div class="container">
+      <div class="form-group">
+        <label for="username">User Name:</label>
+        <input type="text" name="username" id="username" />
+      </div>
+      <div class="form-group">
+        <button onclick="sendRequest('/fast')">Simulate Fast Request</button>
+      </div>
+      <div class="form-group">
+        <button onclick="sendRequest('/slow')">Simulate Slow Request</button>
+      </div>
+      <div class="form-group">
+        <button onclick="sendRequest('/failed')">Simulate Failed Request</button>
+      </div>
+      <div id="response"></div>
+    </div>
+    <script>
+      function sendRequest(url) {
+        var username = document.getElementById("username").value;
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("response").innerHTML = xhr.responseText;
+          }
+        };
+
+        xhr.open('GET', url + '?username=' + username);
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
